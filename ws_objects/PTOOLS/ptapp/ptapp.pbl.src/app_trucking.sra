@@ -1,6 +1,8 @@
 ﻿$PBExportHeader$app_trucking.sra
 $PBExportComments$Trucking (Application from PBL map PTApp) //@(*)[8916340|47]<nosync>
 forward
+global type app_trucking from application
+end type
 global n_tr_trucking sqlca
 global dynamicdescriptionarea sqlda
 global dynamicstagingarea sqlsa
@@ -116,7 +118,17 @@ Long sl_totaleventidsCtr
 end variables
 
 global type app_trucking from application
- end type
+string appname = "app_trucking"
+string themepath = "C:\Program Files (x86)\Appeon\PowerBuilder 19.0\IDE\theme"
+string themename = "Do Not Use Themes"
+boolean nativepdfvalid = false
+boolean nativepdfincludecustomfont = false
+string nativepdfappname = ""
+long richtextedittype = 2
+long richtexteditversion = 1
+string richtexteditkey = ""
+string appicon = "ptools.ico"
+end type
 global app_trucking app_trucking
 
 type prototypes
@@ -137,20 +149,20 @@ FUNCTION int  SetWindowPlacement ( long al_handle, ref s_windowplacement astr_wp
 end prototypes
 
 on app_trucking.create
-appname = "app_trucking"
-message = create n_msg
-sqlca = create n_tr_trucking
-sqlda = create dynamicdescriptionarea
-sqlsa = create dynamicstagingarea
-error = create n_err
+appname="app_trucking"
+message=create n_msg
+sqlca=create n_tr_trucking
+sqlda=create dynamicdescriptionarea
+sqlsa=create dynamicstagingarea
+error=create n_err
 end on
 
 on app_trucking.destroy
-destroy( sqlca )
-destroy( sqlda )
-destroy( sqlsa )
-destroy( error )
-destroy( message )
+destroy(sqlca)
+destroy(sqlda)
+destroy(sqlsa)
+destroy(error)
+destroy(message)
 end on
 
 event close;//@(text)(recreate=yes)<Body>
@@ -158,6 +170,7 @@ gnv_app.Event pfc_Close()
 destroy gnv_bcmmgr  // switched the following two destroys
 DESTROY gnv_app  
 //@(text)--
+//
 
 end event
 
